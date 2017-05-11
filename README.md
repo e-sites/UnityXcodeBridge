@@ -169,7 +169,7 @@ The two files will look like this:
     
     UIViewController *vc = [UIViewController new];
     [vc.view setFrame:self.window.bounds];
-    [vc.view addSubview:_rootController.view];
+    [vc.view addSubview:self.rootViewController.view];
     [self.window setRootViewController:vc];
     
     btn = [UIButton buttonWithType:UIButtonTypeSystem];
