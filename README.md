@@ -119,7 +119,7 @@ This is where the `calledFromUnity()` function we declared earlier would return.
 ## Build the project
 - Open `Build Settings`: `File -> Build Settings` or press `⇧⌘B`.
 - Use the following settings:
- ![](Assets/Build-settings.png)
+ ![](Assets/Build-Settings.png)
 - Press `Build`
 - Wait ...
 - After a while your Xcode project should be created
