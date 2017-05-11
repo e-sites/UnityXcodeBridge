@@ -275,4 +275,4 @@ This way it will load the `AppController` class instead of the `UnityAppControll
 
 ## Results
 
-![](Assets/Result.gif)
+![](Assets/Result.gif?001)
