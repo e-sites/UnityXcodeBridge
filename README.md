@@ -33,24 +33,23 @@ using UnityEngine.UI;
 using System.Runtime.InteropServices;
 
 public class BehaviourScript : MonoBehaviour {
-	public GameObject ball;
-	public Button button;
+    public GameObject ball;
+    public Button button;
 
-	[DllImport ("__Internal")]
-	private static extern void calledFromUnity();
+    [DllImport ("__Internal")]
+    private static extern void calledFromUnity();
 
-	void Start () {
-		button.onClick.AddListener (Tap);
-	}
+    void Start () {
+        button.onClick.AddListener (Tap);
+    }
 
-	void Tap()  {
-		calledFromUnity();
-	}
+    void Tap()  {
+        calledFromUnity();
+    }
 
-	void Bounce(string direction) {
-		Debug.Log ("Bounce!");
-		ball.GetComponent<Rigidbody>().AddForce(transform.up * 300);
-	}
+    void Bounce(string direction) {
+        ball.GetComponent<Rigidbody>().AddForce(transform.up * 300);
+    }
 }
 ```
 
@@ -70,18 +69,18 @@ This creates a reference to the c function `calledFromUnity()`, which will be im
 
 ```cs
 void Start () {
-	button.onClick.AddListener (Tap);
+    button.onClick.AddListener (Tap);
 }
 
 void Tap()  {
-	calledFromUnity();
+    calledFromUnity();
 }
 ```
 Would listen for a click event on the `button`. When a click occurs the c-function `calledFromUnity()` will be called and invoked in (Obj-)C.
 
 ```cs
 void Bounce(string direction) {
-	ball.GetComponent<Rigidbody>().AddForce(transform.up * 300);
+    ball.GetComponent<Rigidbody>().AddForce(transform.up * 300);
 }
 ```	
 This would make the ball bounce. `Bounce(string)` will be called from Obj-c / Xcode. 
@@ -105,8 +104,7 @@ At this stage you would have a button which would do nothing (yet) and have a fu
 `plugin.mm` should contain the following code:
 
 ```c
-extern "C"
-{
+extern "C" {
     void calledFromUnity() {        
         [[NSNotificationCenter defaultCenter] postNotificationName:@"UnityNotification" object:nil];
     }
