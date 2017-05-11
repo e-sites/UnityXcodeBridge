@@ -1,5 +1,7 @@
 # Unity C# <> Xcode Objective-C Bridge
 
+A "simple" step-by-step tutorial on how to make a bridge between Unity's C# and Xcode's Objective-C. Either way.
+
 ## Unity Scene set up
 - First set up a new scene in Unity and add a plane with a simple sphere above it. So we can interact with it later.
 - Make sure the purple `Sphere` has a `RigidBody` and `Use Gravity` is enabled. 
