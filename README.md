@@ -142,18 +142,6 @@ This is where the `calledFromUnity()` function we declared earlier would return.
 The two files will look like this:
 
 ```objc
-// .h
-
-#import "UnityAppController.h"
-
-@interface AppController : UnityAppController {
-    
-}
-    
-@end
-```
-
-```objc
 // .mm
 
 #import "AppController.h"
@@ -169,7 +157,8 @@ The two files will look like this:
     
     UIViewController *vc = [UIViewController new];
     [vc.view setFrame:self.window.bounds];
-    [vc.view addSubview:self.rootViewController.view];
+    [vc.view addSubview:self.rootViewController.view];    
+    [vc addChildViewController:self.rootViewController];
     [self.window setRootViewController:vc];
     
     btn = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -185,7 +174,7 @@ The two files will look like this:
     UnitySendMessage("Plane", "Bounce", "Up");
 }
     
-- (void) notificationFired:(NSNotification *)notification {
+- (void)notificationFired:(NSNotification *)notification {
 	NSString *originalTitle = [btn titleForState: UIControlStateNormal];
 	[btn setTitle:@"😎" forState:UIControlStateNormal];
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -217,7 +206,7 @@ Since `AppController` extends `UnityAppController` and `startUnity:` is called w
 ```
 
 ```objc
-- (void) notificationFired:(NSNotification *)notification {
+- (void)notificationFired:(NSNotification *)notification {
 	NSString *originalTitle = [btn titleForState: UIControlStateNormal];
 	[btn setTitle:@"😎" forState:UIControlStateNormal];
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -231,7 +220,8 @@ Listen for the `"UnityNotification"` notification to be fired and call the `noti
 ```objc
 UIViewController *vc = [UIViewController new];
 [vc.view setFrame:self.window.bounds];
-[vc.view addSubview:_rootController.view];
+[vc.view addSubview:self.rootViewController.view];    
+[vc addChildViewController:self.rootViewController];
 [self.window setRootViewController:vc];
 ```
 This would create a new `UIViewController` and places the original unity viewcontroller in it. This way we can add our own UI on top of Unity.
