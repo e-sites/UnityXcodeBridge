@@ -1,4 +1,4 @@
-# 'Unity C# <> Xcode Objective-C' Bridge
+# Unity C# <> Xcode Objective-C Bridge
 
 ## Unity Scene set up
 - First set up a new scene in Unity and add a plane with a simple sphere above it. So we can interact with it later.
