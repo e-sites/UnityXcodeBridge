@@ -1,6 +1,6 @@
-#'Unity C# <> Xcode Objective-C' Bridge
+# 'Unity C# <> Xcode Objective-C' Bridge
 
-##Unity Scene set up
+## Unity Scene set up
 - First set up a new scene in Unity and add a plane with a simple sphere above it. So we can interact with it later.
 - Make sure the purple `Sphere` has a `RigidBody` and `Use Gravity` is enabled. 
 
@@ -10,7 +10,7 @@
 
 If you run the scene the purple sphere would drop on the white plane.
 
-##Unity GUI
+## Unity GUI
 Next up we're going to add a GUI button to send information to Objective-c
 - Add a `UI -> Button`
 - It should be aligned to the left-bottom
@@ -18,7 +18,7 @@ Next up we're going to add a GUI button to send information to Objective-c
 
 ![](Assets/Unity-scene2.png)
 
-##Unity Script
+## Unity Script
 - Next stop, create a new C# Script, name it `BehaviourScript` or anything to your liking
 
 Open the script and use this code:
@@ -91,7 +91,7 @@ Now go back into Unity and add the `BehaviourScript` to your plane and connect `
 
 At this stage you would have a button which would do nothing (yet) and have a function which isn't called (yet).
 
-##iOS Plugin
+## iOS Plugin
 - Create a new folder called `Plugin` in your project
 - Create a new folder called `iOS` in `Plugin`
 - Create a new file called `plugin.mm` in that `iOS` folder
@@ -116,7 +116,7 @@ This is where the `calledFromUnity()` function we declared earlier would return.
 
 > 💡 There are a few options regarding dispatching methods from C to Objective-C's main view, but for now we'll stick to this.
 
-##Build the project
+## Build the project
 - Open `Build Settings`: `File -> Build Settings` or press `⇧⌘B`.
 - Use the following settings:
  ![](Assets/Build-settings.png)
@@ -125,7 +125,7 @@ This is where the `calledFromUnity()` function we declared earlier would return.
 - After a while your Xcode project should be created
 - Open `Unity-iPhone.xcodeproj`
 
-##A UIViewController on top of Unity
+## A UIViewController on top of Unity
 - Create a new Objective-C class in the `Classes` folder name `AppController`.
 
 ![](Assets/XcodeCreateAppController.png)
@@ -251,7 +251,16 @@ Creates the actual button and places it on the newly created `UIViewController`
     UnitySendMessage("Plane", "Bounce", "Up");
 }
 ```
-- Next open `main.mm` (also in the Classes folder) and change this line:
+
+The button tap will invoke `tapButton:` and will fire `UnitySendMessage` with 3 parameters:
+
+- `"Plane"`: The name of the `GameObject` in Unity
+- `"Bounce"`: The name of the function in the `BehaviourScript.cs` Unity C# Script.
+- `"Up"`: The parameter to be used in the `Bounce(string)` function. (For now this hasn't any effect, you can place any string in it)
+
+
+## main.mm
+- Open `main.mm` (also in the Classes folder) and change this line:
 
 ```c
 const char* AppControllerClassName = "UnityAppController";
@@ -264,10 +273,6 @@ const char* AppControllerClassName = "AppController";
 ```
 This way it will load the `AppController` class instead of the `UnityAppController` class.
 
-The button tap will invoke `tapButton:` and will fire `UnitySendMessage` with 3 parameters:
-
-- `"Plane"`: The name of the `GameObject` in Unity
-- `"Bounce"`: The name of the function in the `BehaviourScript.cs` Unity C# Script.
-- `"Up"`: The parameter to be used in the `Bounce(string)` function. (For now this hasn't any effect, you can place any string in it)
+## Results
 
 ![](Assets/Result.gif)
